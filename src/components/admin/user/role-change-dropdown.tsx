@@ -62,9 +62,9 @@ export function RoleChangeDropdown({
     const buttonRect = buttonRef.current.getBoundingClientRect();
 
     return (
-      <div
+    <div
         ref={dropdownRef}
-        className="glass-card-no-glow rounded-lg border border-border overflow-hidden z-[100] shadow-[0_0_30px_rgba(0,0,0,0.5)] animate-slide-up"
+        className="bg-white rounded-xl border border-blue-100 overflow-hidden z-[100] shadow-xl shadow-blue-900/5 animate-slide-up"
         style={{
           position: "fixed",
           top: buttonRect.bottom + window.scrollY + 8,
@@ -82,8 +82,8 @@ export function RoleChangeDropdown({
               w-full text-left px-4 py-2.5 text-sm transition-all duration-300
               ${
                 role === currentRole
-                  ? "bg-primary/10 text-primary cursor-default"
-                  : "text-foreground hover:bg-primary/10 hover:text-primary"
+                  ? "bg-blue-50 text-blue-700 font-bold cursor-default border-l-2 border-blue-600"
+                  : "text-slate-600 font-medium hover:bg-slate-50 hover:text-blue-600 border-l-2 border-transparent"
               }
             `}
           >
@@ -95,18 +95,18 @@ export function RoleChangeDropdown({
   };
 
   return (
-    <div className="relative">
+    <div className="relative cursor-pointer">
       <Button
         ref={buttonRef}
         variant="outline"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
-        className="border-border text-muted-foreground hover:text-foreground hover:border-primary/30 disabled:opacity-50"
+        className={`bg-white border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 disabled:opacity-50 shadow-sm rounded-lg transition-all duration-300 ${isOpen ? "border-blue-200 bg-blue-50 text-blue-600" : ""}`}
       >
-        <span className="material-symbols-outlined text-base mr-1">badge</span>
-        {currentRole}
-        <span className="material-symbols-outlined text-base ml-1">
+        <span className="material-symbols-outlined text-[18px] mr-1.5 text-blue-500">badge</span>
+        <span className="font-semibold">{currentRole}</span>
+        <span className={`material-symbols-outlined text-[18px] ml-1 transition-transform duration-300 text-slate-400 ${isOpen ? "rotate-180 text-blue-500" : ""}`}>
           expand_more
         </span>
       </Button>
@@ -116,4 +116,5 @@ export function RoleChangeDropdown({
         createPortal(<DropdownContent />, portalContainer)}
     </div>
   );
+  
 }

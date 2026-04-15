@@ -14,15 +14,15 @@ const tabs = [
 
 export function RoleFilterTabs({ value, onChange }: RoleFilterTabsProps) {
   return (
-    <div className="flex items-center gap-2 flex-wrap mb-6">
+    <div className="flex items-center gap-2 flex-wrap mb-6 bg-slate-50/50 p-1.5 rounded-2xl border border-blue-50 w-fit">
       {tabs.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onChange(tab.value)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 border ${
+          className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
             value === tab.value
-              ? "bg-primary/10 text-primary border-primary/30 shadow-[0_0_15px_rgba(249,115,22,0.2)]"
-              : "bg-muted/30 text-muted-foreground border-border hover:border-primary/30 hover:text-foreground"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+              : "bg-transparent text-slate-500 hover:bg-blue-50/50 hover:text-blue-700"
           }`}
         >
           {tab.label}
