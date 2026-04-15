@@ -18,15 +18,17 @@ export function FeatureToggle({
       variant="outline"
       size="sm"
       onClick={() => onToggle(courseId, !isFeatured)}
-      className={`border transition-all duration-300 hover:scale-105 ${
+      className={`border rounded-lg transition-all duration-300 hover:scale-105 shadow-sm ${
         isFeatured
-          ? "border-primary/50 text-primary bg-primary/10 hover:bg-primary/20"
-          : "border-border text-muted-foreground hover:border-primary/30 hover:text-primary"
+          ? "border-amber-200 text-amber-500 bg-amber-50 hover:bg-amber-100"
+          : "border-slate-200 text-slate-400 bg-white hover:border-amber-200 hover:text-amber-500 hover:bg-amber-50"
       }`}
       title={isFeatured ? "Remove from featured" : "Feature on landing page"}
     >
       <span
-        className={`material-symbols-outlined text-base ${isFeatured ? "animate-pulse" : ""}`}
+        className={`material-symbols-outlined text-[18px] ${
+          isFeatured ? "animate-pulse" : ""
+        }`}
       >
         {isFeatured ? "star" : "star_outline"}
       </span>
