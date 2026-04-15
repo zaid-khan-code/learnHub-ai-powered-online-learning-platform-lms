@@ -44,66 +44,82 @@ export default async function AdminOverviewPage() {
   const recentCourses = dbCourses.slice(0, 5);
 
   return (
-    <div className="flex h-screen bg-background text-foreground overflow-hidden relative">
-      {/* ===== BACKGROUND EFFECTS (Aapka Original CSS) ===== */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-      <div
-        className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse"
-        style={{ animationDelay: "1s" }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse"
-        style={{ animationDelay: "2s" }}
-      />
-      <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
-      {/* ===== END BACKGROUND EFFECTS ===== */}
+   <div className="flex h-screen bg-slate-50 text-slate-900 overflow-hidden relative">
+  {/* ===== BACKGROUND EFFECTS (Blue & White Theme) ===== */}
+  {/* Soft Blue Glows */}
+  <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px] pointer-events-none" />
+  <div 
+    className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-sky-300/10 rounded-full blur-[120px] pointer-events-none" 
+    style={{ animationDelay: "1s" }}
+  />
+  {/* Subtle Grid Pattern for Texture */}
+  <div className="absolute inset-0 bg-[url('https://play.tailwindcss.com/img/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20 pointer-events-none" />
+  {/* ===== END BACKGROUND EFFECTS ===== */}
 
-      {/* Desktop Sidebar */}
-      <div className="hidden md:block w-fit flex-shrink-0 relative z-10">
-        <DashboardSidebar role="admin" />
-      </div>
+  {/* Desktop Sidebar */}
+  <div className="hidden md:block w-fit flex-shrink-0 relative z-20 border-r border-blue-100 bg-white/80 backdrop-blur-md">
+    <DashboardSidebar role="admin" />
+  </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden relative z-10">
-        <DashboardNavbar title="Platform Overview" role="admin" />
+  {/* Main Content Area */}
+  <div className="flex-1 flex flex-col overflow-hidden relative z-10">
+    {/* Navbar with subtle shadow */}
+    <div className="bg-white/70 backdrop-blur-md border-b border-blue-100">
+      <DashboardNavbar title="Platform Overview" role="admin" />
+    </div>
 
-        <div className="flex-1 overflow-y-auto p-0">
-          <div className="w-full px-6 py-6 space-y-6">
-            {/* Page Header */}
-            <div className="flex items-center justify-between relative">
-              <div className="space-y-1">
-                <h1 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3">
-                  <span className="material-symbols-outlined text-3xl text-primary animate-pulse">
-                    dashboard
-                  </span>
-                  Platform Overview
-                </h1>
-                <p className="text-muted-foreground text-sm">
-                  Monitor platform health and recent activity
-                </p>
-              </div>
-              <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 shadow-[0_0_20px_rgba(249,115,22,0.2)]">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                <span className="text-xs text-primary font-medium">
-                  System Healthy
+    <div className="flex-1 overflow-y-auto custom-scrollbar">
+      <div className="w-full px-4 md:px-8 py-6 space-y-8">
+        
+        {/* Page Header */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-800 flex items-center gap-3">
+              <div className="p-2 bg-blue-600 rounded-lg shadow-blue-200 shadow-lg">
+                <span className="material-symbols-outlined text-white block">
+                  dashboard
                 </span>
               </div>
-            </div>
+              Platform Overview
+            </h1>
+            <p className="text-slate-500 text-sm md:text-base ml-1">
+              Monitor platform health and recent activity
+            </p>
+          </div>
 
-            {/* Stats Overview */}
-            <StatsOverview stats={stats} />
-
-            {/* Tables Area */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Users Table */}
-              <RecentUsersTable users={recentUsers} />
-
-              {/* Courses Table */}
-              <RecentCoursesTable courses={recentCourses} />
-            </div>
+          {/* System Status Badge */}
+          <div className="w-fit flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-100 shadow-sm transition-all hover:shadow-md">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span className="text-xs text-blue-700 font-semibold tracking-wide uppercase">
+              System Healthy
+            </span>
           </div>
         </div>
+
+        {/* Stats Overview (Pass props as needed) */}
+        <div className="relative">
+          <StatsOverview stats={stats} />
+        </div>
+
+        {/* Tables Area */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-10">
+          {/* Recent Users Table Container */}
+          <div className="bg-white rounded-2xl border border-blue-50 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+            <RecentUsersTable users={recentUsers} />
+          </div>
+
+          {/* Recent Courses Table Container */}
+          <div className="bg-white rounded-2xl border border-blue-50 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+            <RecentCoursesTable courses={recentCourses} />
+          </div>
+        </div>
+
       </div>
     </div>
+  </div>
+</div>
   );
 }
